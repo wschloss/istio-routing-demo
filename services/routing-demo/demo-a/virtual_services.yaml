@@ -1,0 +1,57 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: account-orchestrator
+  namespace: multi-tenant-namespace
+spec:
+  gateways:
+  - public-gateway
+  hosts:
+  - '*'
+  http:
+  - match:
+    - headers:
+        x-client-id:
+          exact: resi
+    route:
+    - destination:
+        host: account-orchestrator
+        port:
+          number: 8080
+        subset: resi
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: identity-domain-service
+  namespace: multi-tenant-namespace
+spec:
+  hosts:
+  - identity-domain-service
+  http:
+  - match:
+    - headers:
+        x-client-id:
+          exact: resi
+    route:
+    - destination:
+        host: identity-domain-service
+        subset: resi
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: account-domain-service
+  namespace: multi-tenant-namespace
+spec:
+  hosts:
+  - account-domain-service
+  http:
+  - match:
+    - headers:
+        x-client-id:
+          exact: resi
+    route:
+    - destination:
+        host: account-domain-service
+        subset: resi

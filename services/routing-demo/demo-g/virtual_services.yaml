@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: account-domain-service
+  namespace: multi-tenant-namespace
+spec:
+  hosts:
+  - account-domain-service
+  http:
+  - match:
+    - headers:
+        x-client-id:
+          exact: resi
+    route:
+    - destination:
+        host: account-domain-service
+        subset: resi
+  - match:
+    - headers:
+        x-client-id:
+          exact: msa
+    route:
+    - destination:
+        host: account-domain-service
+        subset: msa
+      weight: 75
+    - destination:
+        host: account-domain-service
+        subset: msa-canary
+      weight: 25

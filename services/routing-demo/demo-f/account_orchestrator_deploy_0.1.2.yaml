@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: account-orchestrator
+    role: external
+    version: 0.1.2
+  name: account-orchestrator-0.1.2
+  namespace: multi-tenant-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: account-orchestrator
+      role: external
+      version: 0.1.2
+  template:
+    metadata:
+      labels:
+        app: account-orchestrator
+        role: external
+        version: 0.1.2
+    spec:
+      containers:
+      - env:
+        - name: IDENTITY_DOMAIN_SERVICE_LOCATION
+          value: http://identity-domain-service:8080/
+        - name: ACCOUNT_DOMAIN_SERVICE_LOCATION
+          value: http://account-domain-service:8080/
+        image: wcschlosser/account-orchestrator:0.1.2
+        name: account-orchestrator

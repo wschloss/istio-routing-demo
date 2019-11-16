@@ -1,0 +1,14 @@
+{
+  "name": "account-domain-service",
+  "version": "1.0.0",
+  "description": "Test service for forwarding requests",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "wschlosser",
+  "dependencies": {
+    "express": "4.16.3",
+    "request": "2.85.0"
+  }
+}

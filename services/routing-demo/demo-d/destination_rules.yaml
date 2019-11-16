@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: account-domain-service
+  namespace: multi-tenant-namespace
+spec:
+  host: account-domain-service
+  subsets:
+  - labels:
+      version: 0.1.1 # UPGRADE TO 0.1.1 FOR RESI
+    name: resi
+  - labels:
+      version: 0.1.1
+    name: msa

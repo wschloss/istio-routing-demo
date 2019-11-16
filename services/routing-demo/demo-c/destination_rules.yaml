@@ -1,0 +1,44 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: account-orchestrator
+  namespace: multi-tenant-namespace
+spec:
+  host: account-orchestrator
+  subsets:
+  - labels:
+      version: 0.1.0
+    name: resi
+  - labels:
+      version: 0.1.1
+    name: msa # ADD MSA
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: identity-domain-service
+  namespace: multi-tenant-namespace
+spec:
+  host: identity-domain-service
+  subsets:
+  - labels:
+      version: 0.1.1
+    name: resi
+  - labels:
+      version: 0.1.1
+    name: msa # ADD MSA
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: account-domain-service
+  namespace: multi-tenant-namespace
+spec:
+  host: account-domain-service
+  subsets:
+  - labels:
+      version: 0.1.0
+    name: resi
+  - labels:
+      version: 0.1.1
+    name: msa # ADD MSA

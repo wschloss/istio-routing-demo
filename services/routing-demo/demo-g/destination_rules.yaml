@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: account-domain-service
+  namespace: multi-tenant-namespace
+spec:
+  host: account-domain-service
+  subsets:
+  - labels:
+      version: 0.1.0
+    name: resi
+  - labels:
+      version: 0.1.1
+    name: msa
+  - labels:
+      version: 0.1.2
+    name: msa-canary

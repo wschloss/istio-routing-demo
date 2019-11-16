@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: account-orchestrator
+  namespace: multi-tenant-namespace
+spec:
+  host: account-orchestrator
+  subsets:
+  - labels:
+      version: 0.1.0
+    name: resi
+  - labels:
+      version: 0.1.2
+    name: resi-mirror # Add a resi-mirror subset
+  - labels:
+      version: 0.1.1
+    name: msa

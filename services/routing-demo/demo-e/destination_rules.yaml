@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: identity-domain-service
+  namespace: multi-tenant-namespace
+spec:
+  host: identity-domain-service
+  subsets:
+  - labels:
+      version: 0.1.2 # ROLLOUT 0.1.2 FOR RESI
+    name: resi
+  - labels:
+      version: 0.1.1
+    name: msa

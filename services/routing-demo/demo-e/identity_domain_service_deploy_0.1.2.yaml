@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: identity-domain-service
+    role: internal
+    version: 0.1.2
+  name: identity-domain-service-0.1.2
+  namespace: multi-tenant-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-domain-service
+      role: internal
+      version: 0.1.2
+  template:
+    metadata:
+      labels:
+        app: identity-domain-service
+        role: internal
+        version: 0.1.2
+    spec:
+      containers:
+      - image: wcschlosser/identity-domain-service:0.1.2
+        name: identity-domain-service
