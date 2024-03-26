@@ -8,7 +8,7 @@
   },
   "author": "wschlosser",
   "dependencies": {
-    "express": "4.16.3",
+    "express": "4.19.2",
     "request": "2.85.0"
   }
 }
